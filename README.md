@@ -20,10 +20,4 @@ A searchable atlas of ~30,000 anime titles, built with Next.js, [Shadcn UI](http
 
 The `anime` table holds the dataset (sourced from MyAnimeList). See [`supabase/schema.sql`](./supabase/schema.sql) for the `reviews` table + RLS policies, and [`supabase/views.sql`](./supabase/views.sql) for the aggregation views (`genre_list`, `genre_counts`, `type_counts`, `year_counts`) that back the browse filters and stats charts.
 
-## Local development
 
-```bash
-npm install
-cp .env.example .env.local # fill in your Supabase project URL + publishable key
-npm run dev
-```
