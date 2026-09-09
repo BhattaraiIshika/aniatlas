@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AniAtlas
 
-## Getting Started
+A searchable atlas of ~30,000 anime titles, built with Next.js, [Shadcn UI](https://ui.shadcn.com), and [Supabase](https://supabase.com), deployed on Vercel.
 
-First, run the development server:
+## Features
+
+- **Browse** &mdash; search by title, filter by genre/type, sort by score/popularity/year, paginated.
+- **Anime detail pages** &mdash; synopsis, studios, genres, and live user reviews.
+- **Reviews** &mdash; anyone can rate (1-5 stars) and review a title; stored live in Supabase via a server action.
+- **Stats dashboard** &mdash; genre distribution, format breakdown, and titles-per-year charts computed from SQL views.
+
+## Stack
+
+- Next.js (App Router) + TypeScript + Tailwind CSS
+- Shadcn UI (`base-nova` style, built on Base UI) for all interactive components
+- Supabase (Postgres) for data, with row-level security policies for public read + review inserts
+- Recharts for the stats dashboard
+
+## Data
+
+The `anime` table holds the dataset (sourced from MyAnimeList). See [`supabase/schema.sql`](./supabase/schema.sql) for the `reviews` table + RLS policies, and [`supabase/views.sql`](./supabase/views.sql) for the aggregation views (`genre_list`, `genre_counts`, `type_counts`, `year_counts`) that back the browse filters and stats charts.
+
+## Local development
 
 ```bash
+npm install
+cp .env.example .env.local # fill in your Supabase project URL + publishable key
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
